@@ -1,188 +1,134 @@
-class Televisores {
-    constructor (marca, display, precio, pulgadas, resolucion){
+class Productos {
+    constructor(imagen, id, marca, precio, categoria){
+        this.imagen = imagen;
+        this.id = id;
         this.marca = marca;
-        this.display = display;
         this.precio = parseFloat(precio);
+        this.categoria = categoria;
+    }
+}
+class Tvs extends Productos {
+    constructor(imagen, id, marca, precio, categoria, display, pulgadas, resolucion){
+        super(imagen,id,marca,precio,categoria);
+        this.display = display;
         this.pulgadas = parseInt(pulgadas);
         this.resolucion = resolucion;
     }
-    mostrarInfo(){
-        return `${this.marca} ${this.display} "${this.pulgadas} - ${this.resolucion} / $${this.precio}`;
+    mostrarTitulo(){
+        return `${this.categoria} ${this.marca} - ${this.display} ${this.resolucion} ${this.pulgadas}"`
     }
 }
-class Parlantes {
-    constructor (nombre,marca, precio, conector, potencia){
+class Mouses extends Productos {
+    constructor(imagen, id, marca, precio, categoria, nombre, dpi, wireless){
+        super(imagen,id,marca,precio,categoria);
         this.nombre = nombre;
-        this.marca = marca;
-        this.precio = parseFloat(precio);
+        this.dpi = parseInt(dpi);
+        this.wireless = wireless;
+    }
+    mostrarTitulo(){
+        if (this.wireless == true){
+            this.wireless = "WIRELESS";
+            return `${this.categoria} ${this.marca} ${this.nombre} - ${this.dpi} DPI ${this.wireless}`
+        }
+        else{
+        return `${this.categoria} ${this.marca} ${this.nombre} - ${this.dpi} DPI`
+        }
+    }
+}
+class Parlantes extends Productos {
+    constructor (imagen, id, marca, precio, categoria, nombre, conector, potencia){
+        super(imagen,id,marca,precio,categoria);
+        this.nombre = nombre;
         this.conector = conector;
         this.potencia = potencia;
     }
-    mostrarInfo(){
-        return `${this.marca} ${this.nombre} ${this.potencia} - ${this.conector} / $${this.precio}`;
+    mostrarTitulo(){
+        return `${this.categoria} ${this.marca} ${this.nombre} - ${this.conector} ${this.potencia}`
     }
 }
-class Teclados {
-    constructor (nombre, marca, precio, switches, wireless){
+class Teclados extends Productos {
+    constructor (imagen, id, marca, precio, categoria, nombre, switches, wireless){
+        super(imagen,id,marca,precio,categoria);
         this.nombre = nombre;
-        this.marca = marca;
-        this.precio = parseFloat(precio);
         this.switches = switches;
         this.wireless = wireless;
     }
-    mostrarInfo(){
-        let wireless = "";
-        if (this.wireless == true){    
-            wireless = "WIRELESS";  
+    mostrarTitulo(){
+        if (this.wireless == true){
+            this.wireless = "WIRELESS";
+            return `${this.categoria} ${this.marca} ${this.nombre} - ${this.switches} ${this.wireless}`
         }
-        return `${this.marca} ${this.nombre} - ${this.switches} ${wireless} / $${this.precio}`;
-    }
-}
-class Mouses {
-    constructor (nombre, marca, precio, dpi, wireless){
-        this.nombre = nombre;
-        this.marca = marca;
-        this.precio = parseFloat(precio);
-        this.dpi = parseInt(dpi);
-        this.wireless = false;
-    }
-    mostrarInfo(){
-        let wireless = "";
-        if (this.wireless == true){    
-            wireless = "WIRELESS";
-            console.log(wireless)
+        else{
+        return `${this.categoria} ${this.marca} ${this.nombre} - ${this.switches}`
         }
-        return `${this.marca} ${this.nombre} - ${this.dpi} DPI ${wireless} / $${this.precio}`;
+        // this.wireless == true ? return `${this.categoria} ${this.marca} ${this.nombre} - ${this.switches} Wireless`
     }
 }
 
-const televisores = [
-    new Televisores ("SAMSUNG", "QLED", 500000, 72, "4K"),
-    new Televisores ("BGH", "OLED", 120000, 50, "2K"),
-    new Televisores ("ZOEI", "LCD", 80000, 40, "FULL HD"),
-    new Televisores ("LG", "LED", 60000, 32, "HD")
-]
-const parlantes = [
-    new Parlantes ("FLIP 6", "JBL", 36000, "USB-C", "20W"),
-    new Parlantes ("CLIP 4", "JBL", 17390, "USB-C", "5W"),
-    new Parlantes ("MI", "XIAOMI", 14000, "AUXILIAR ,USB-C", "16W"),
-    new Parlantes ("GO 3", "JBL", 9870, "USB","4.2W")
-]
-const teclados = [
-    new Teclados ("PRO X", "LOGITECH", 26000, "CHERRY MX BROWN", true),
-    new Teclados ("ALLOY ELITE", "HYPER X", 23000, "CHERRY MX RED"),
-    new Teclados ("FIZZ PRO K616", "RED DRAGON", 11000, "OUTEMU RED", true),
-    new Teclados ("KUMARA K552", "RED DRAGON", 10000, "OUTEMU BLUE")
-]
-const mouses = [
-    new Mouses ("MASTER SERIES MX ANYWHERE 3", "LOGITECH", 15000, 4000, true),
-    new Mouses ("G SERIES LIGHTSPEED G305", "LOGITECH", 7750, 12000, true),
-    new Mouses ("PULSEFIRE CORE", "HYPER X", 2700, 6200),
-    new Mouses ("MINOS X2", "KOUGAR", 1478, 3000)
+const productos = [
+    new Tvs ("https://http2.mlstatic.com/D_NQ_NP_720674-MLA52029248980_102022-O.webp", 1, "Samsung", 500000, "Smart TV", "QLED", 43, "4K"),
+    new Tvs ("https://http2.mlstatic.com/D_NQ_NP_689494-MLA51838855315_102022-O.webp", 2, "BGH", 120000, "Smart TV", "LCD", 50, "2K"),
+    new Tvs ("https://http2.mlstatic.com/D_NQ_NP_808322-MLA52162460389_102022-O.webp", 3, "Philco", 80000, "Smart TV", "OLED", 40, "Full HD"),
+    new Tvs ("https://http2.mlstatic.com/D_NQ_NP_660116-MLA52216049488_102022-O.webp", 4, "LG", 60000, "Smart TV", "LED", 32, "HD"),
+    new Parlantes ("https://http2.mlstatic.com/D_NQ_NP_869763-MLA50495066082_062022-O.webp", 100, "JBL", 36000, "Parlante", "Flip 6", "USB-C", "20W"),
+    new Parlantes ("https://http2.mlstatic.com/D_NQ_NP_957744-MLA50400740811_062022-O.webp", 101, "JBL", 17390, "Parlante", "Clip 4", "USB-C", "5W"),
+    new Parlantes ("https://http2.mlstatic.com/D_NQ_NP_640537-MLA45157713114_032021-O.webp", 102, "Xiaomi", 14000, "Parlante", "MI", "Auxiliar | USB-C", "16W"),
+    new Parlantes ("https://http2.mlstatic.com/D_NQ_NP_754237-MLA44715287415_012021-O.webp", 103, "JBL", 9870, "Parlante", "GO 3", "USB", "4.2W"),
+    new Teclados ("https://http2.mlstatic.com/D_NQ_NP_757719-MLA52349939112_112022-O.webp", 200, "Logitech", 26000, "Teclado", "Pro X", "Cherry MX Brown", true),
+    new Teclados ("https://http2.mlstatic.com/D_NQ_NP_741180-MLA51631455572_092022-O.webp", 201, "Hyper X", 23000, "Teclado", "Alloy elite", "Cherry MX Red", false),
+    new Teclados ("https://http2.mlstatic.com/D_NQ_NP_944516-MLA50059145076_052022-O.webp", 202, "Red Dragon", 11000, "Teclado", "Fizz Pro K616", "OUTEMU Red", true),
+    new Teclados ("https://http2.mlstatic.com/D_NQ_NP_817802-MLA52350652821_112022-O.webp", 203, "Red Dragon", 10000, "Teclado", "Kumara K552", "OUTEMU Blue", false),
+    new Mouses ("https://http2.mlstatic.com/D_NQ_NP_824234-MLA45293283963_032021-O.webp", 300, "Logitech", 15000, "Mouse", "Master Series MX Anywhere 3", 4000, true),
+    new Mouses ("https://http2.mlstatic.com/D_NQ_NP_977588-MLA51172463642_082022-O.webp", 301, "Logitech", 7750, "Mouse", "G Series Lightspeed G305", 12000, true),
+    new Mouses ("https://http2.mlstatic.com/D_NQ_NP_706475-MLA31606024503_072019-O.webp", 302, "Hyper X", 2700, "Mouse", "Pulsefire Core", 6200, false),
+    new Mouses ("https://http2.mlstatic.com/D_NQ_NP_967693-MLA43631701326_092020-O.webp", 303, "Kougar", 1478, "Mouse", "Minos X2", 3000, false)
 ]
 
-function mostrarProductos(z){
-    let info = "Tenemos estos 4 productos disponibles (Ingrese un numero del 1 al 4)\n\n";
-    let count = 0;
-    z.forEach(x =>{
-        count += 1;
-        info += `${count}. ${x.mostrarInfo()}\n`;
+Toastify({
+    text: "Click para ver el carrito",
+    duration: 0,
+    destination: "/cv_proyectos/pw_coderhouse/carrito.html",
+    newWindow: true,
+    gravity: "bottom",
+    position: "right", 
+    stopOnFocus: true, 
+    style: {
+      opacity: ".93",
+      background: "linear-gradient(to top, #00b09b, #96c93d)",
+    },
+}).showToast();
+
+const sectionCards = document.querySelector(".container");
+crearCards(productos,sectionCards);
+const selectFiltro = document.querySelector("#selectFiltro"), 
+selectCategoria = document.querySelector("#selectCategoria"),
+aggCarrito = document.querySelectorAll(".boton");
+carrito = [];
+
+function crearCards(array,container){
+    container.innerHTML = "";
+    array.forEach(i => {
+        card = document.createElement("div");
+        card.className = "card";
+        card.id = `${i.id}`;
+        card.innerHTML =`
+            <h4 class = "card__titulo card__font card__padding">${i.mostrarTitulo()}</h4>
+            <img class = "card__img" src = "${i.imagen}">
+            <span class = "card__precio card__font">$${i.precio}</span>
+            <button class = "boton">Añadir al carrito</button>`;
+        container.appendChild(card);
     });
-    info += "\nX. Volver al menu principal";
-    return info;
 }
-function confirmarCompra(input){
-    let entrada = "";
-    switch(loop){
-    case '1':
-        for (const i of televisores) {
-            if (i.marca == "SAMSUNG" && input == 1){
-                entrada = prompt(`Usted eligio ${i.mostrarInfo()}\n\n¿Desea confirmar la compra? [S - N]`);
-            }
-            else if(i.marca == "BGH" && input == 2){
-                entrada = prompt(`Usted eligio ${i.mostrarInfo()}\n\n¿Desea confirmar la compra? [S - N]`);
-            }
-            else if(i.marca == "ZOEI" && input == 3){
-                entrada = prompt(`Usted eligio ${i.mostrarInfo()}\n\n¿Desea confirmar la compra? [S - N]`);
-            }
-            else if (i.marca == "LG" && input == 4){
-                entrada = prompt(`Usted eligio ${i.mostrarInfo()}\n\n¿Desea confirmar la compra? [S - N]`);
-            }
-        }
-        break
-    case '2':
-        for (const i of parlantes) {
-            if (i.precio == 36000 && input == 1){
-                entrada = prompt(`Usted eligio ${i.mostrarInfo()}\n\n¿Desea confirmar la compra? [S - N]`);
-            }
-            else if(i.precio == 17390 && input == 2){
-                entrada = prompt(`Usted eligio ${i.mostrarInfo()}\n\n¿Desea confirmar la compra? [S - N]`);
-            }
-            else if(i.precio == 14000 && input == 3){
-                entrada = prompt(`Usted eligio ${i.mostrarInfo()}\n\n¿Desea confirmar la compra? [S - N]`);
-            }
-            else if (i.precio == 9870 && input == 4){
-                entrada = prompt(`Usted eligio ${i.mostrarInfo()}\n\n¿Desea confirmar la compra? [S - N]`);
-            }
-        }
-        break;
-    case '3':
-        for (const i of teclados) {
-            if (i.precio == 26000 && input == 1){
-                entrada = prompt(`Usted eligio ${i.mostrarInfo()}\n\n¿Desea confirmar la compra? [S - N]`);
-            }
-            else if(i.precio == 23000 && input == 2){
-                entrada = prompt(`Usted eligio ${i.mostrarInfo()}\n\n¿Desea confirmar la compra? [S - N]`);
-            }
-            else if(i.precio == 11000 && input == 3){
-                entrada = prompt(`Usted eligio ${i.mostrarInfo()}\n\n¿Desea confirmar la compra? [S - N]`);
-            }
-            else if (i.precio == 10000 && input == 4){
-                entrada = prompt(`Usted eligio ${i.mostrarInfo()}\n\n¿Desea confirmar la compra? [S - N]`);
-            }
-        }   
-        break;
-    case '4':
-        for (const i of mouses) {
-            if (i.precio == 15000 && input == 1){
-                entrada = prompt(`Usted eligio ${i.mostrarInfo()}\n\n¿Desea confirmar la compra? [S - N]`);
-            }
-            else if(i.precio == 7750 && input == 2){
-                entrada = prompt(`Usted eligio ${i.mostrarInfo()}\n\n¿Desea confirmar la compra? [S - N]`);
-            }
-            else if(i.precio == 2700 && input == 3){
-                entrada = prompt(`Usted eligio ${i.mostrarInfo()}\n\n¿Desea confirmar la compra? [S - N]`);
-            }
-            else if (i.precio == 1478 && input == 4){
-                entrada = prompt(`Usted eligio ${i.mostrarInfo()}\n\n¿Desea confirmar la compra? [S - N]`);
-            }
-        }   
-        break;
+selectFiltro.addEventListener('change',()=>{
+    // (selectFiltro == "1") ? crearCards(productos.sort((a,b)=>{return a.precio-b.precio}),sectionCards):crearCards(productos.sort((a,b)=>{return b.precio-a.precio}),sectionCards)
+    if (selectFiltro.value == "1"){
+        crearCards(productos.sort((a,b)=>{return a.precio-b.precio}),sectionCards);
     }
-
-if (entrada == "S"){alert("Compra Exitosa");}
-else if(entrada == "N"){loop = 0; alert("Volviendo al menu principal");}
-}
-
-let loop;
-let controlLoop = ["1","2","3","4","X"];
-
-
-
-while (loop != "X"){
-    loop = prompt("Bienvenido a mi plataforma de comercio electronico\n\n1. Smart TV\n2. Parlantes\n3. Teclados\n4. Mouse\n\nX. Salir");
-
-    if (controlLoop.includes(loop) == false){(alert("Error opcion invalida"));}
-
-    if (loop == 1){
-        confirmarCompra(prompt((mostrarProductos(televisores))));
-    }else if (loop == 2){
-        confirmarCompra(prompt((mostrarProductos(parlantes))));
-    }else if (loop == 3){
-        confirmarCompra(prompt((mostrarProductos(teclados))));
-    }else if (loop == 4){
-        confirmarCompra(prompt((mostrarProductos(mouses))));
+    else{
+        crearCards(productos.sort((a,b)=>{return b.precio-a.precio}),sectionCards);
     }
-}
-
-alert("Gracias vuelva prontos :D");
+});
+selectCategoria.addEventListener('change',()=>{
+    crearCards(productos.filter(objeto => objeto.categoria == selectCategoria.value),sectionCards);
+});
+// aggCarrito.addEventListener('click',()=>{})
