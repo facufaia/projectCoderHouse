@@ -64,7 +64,6 @@ class Teclados extends Productos {
         // this.wireless == true ? return `${this.categoria} ${this.marca} ${this.nombre} - ${this.switches} Wireless`
     }
 }
-
 const productos = [
     new Tvs ("https://http2.mlstatic.com/D_NQ_NP_720674-MLA52029248980_102022-O.webp", 1, "Samsung", 500000, "Smart TV", "QLED", 43, "4K"),
     new Tvs ("https://http2.mlstatic.com/D_NQ_NP_689494-MLA51838855315_102022-O.webp", 2, "BGH", 120000, "Smart TV", "LCD", 50, "2K"),
@@ -84,26 +83,6 @@ const productos = [
     new Mouses ("https://http2.mlstatic.com/D_NQ_NP_967693-MLA43631701326_092020-O.webp", 303, "Kougar", 1478, "Mouse", "Minos X2", 3000, false)
 ]
 
-Toastify({
-    text: "Click para ver el carrito",
-    duration: 0,
-    destination: "/cv_proyectos/pw_coderhouse/carrito.html",
-    newWindow: true,
-    gravity: "bottom",
-    position: "right", 
-    stopOnFocus: true, 
-    style: {
-      opacity: ".93",
-      background: "linear-gradient(to top, #00b09b, #96c93d)",
-    },
-}).showToast();
-
-const sectionCards = document.querySelector(".container");
-crearCards(productos,sectionCards);
-const selectFiltro = document.querySelector("#selectFiltro"), 
-selectCategoria = document.querySelector("#selectCategoria"),
-aggCarrito = document.querySelectorAll(".boton");
-carrito = [];
 
 function crearCards(array,container){
     container.innerHTML = "";
@@ -119,6 +98,38 @@ function crearCards(array,container){
         container.appendChild(card);
     });
 }
+function aggCarrito(array,container){
+    container.innerHTML = "";
+    array.forEach(i => {
+        card = document.createElement("div");
+        card.className = "card";
+        card.id = `${i.id}`;
+        card.innerHTML =`
+            <h4 class = "card__titulo card__font card__padding">${i.mostrarTitulo()}</h4>
+            <img class = "card__img" src = "${i.imagen}">
+            <span class = "card__precio card__font">$${i.precio}</span>`;
+        container.appendChild(card);
+    });
+}
+
+
+
+
+
+const sectionCards = document.querySelector("#container");
+crearCards(productos,sectionCards);
+const selectFiltro = document.querySelector("#selectFiltro"), 
+selectCategoria = document.querySelector("#selectCategoria"),
+botonCarrito = document.querySelectorAll(".boton"),
+sectionCarrito = document.querySelector("#container1__carrito"),
+carrito = [],
+cart = JSON.parse(localStorage.getItem('cart')),
+containerSelectionCarrito = document.querySelector("#container1"),
+containerTotal = document.querySelector(".container__total");
+
+
+
+
 selectFiltro.addEventListener('change',()=>{
     // (selectFiltro == "1") ? crearCards(productos.sort((a,b)=>{return a.precio-b.precio}),sectionCards):crearCards(productos.sort((a,b)=>{return b.precio-a.precio}),sectionCards)
     if (selectFiltro.value == "1"){
@@ -131,4 +142,39 @@ selectFiltro.addEventListener('change',()=>{
 selectCategoria.addEventListener('change',()=>{
     crearCards(productos.filter(objeto => objeto.categoria == selectCategoria.value),sectionCards);
 });
-// aggCarrito.addEventListener('click',()=>{})
+
+botonCarrito.forEach(boton => {
+    boton.addEventListener('click', (x)=>{
+        carrito.push(productos.find(element => element.id == boton.parentElement.id));
+        localStorage.setItem('cart',JSON.stringify(carrito));
+        aggCarrito(carrito, sectionCarrito);
+    })
+});
+
+Toastify({
+    text: "CARRITO",
+    duration: 0,
+    gravity: "bottom",
+    position: "right", 
+    stopOnFocus: true, 
+    style: {
+      opacity: ".93",
+      background: "linear-gradient(to top, #00b09b, #96c93d)",
+    },
+    onClick: function(){
+        let total = 0;
+        if (containerSelectionCarrito.classList == "unshow"){
+            containerSelectionCarrito.classList = "show";
+            sectionCards.classList = "left";
+        }
+        else if (containerSelectionCarrito.classList == "show"){
+            containerSelectionCarrito.classList = "unshow";
+            sectionCards.classList = "";
+        }
+        carrito.forEach(element => {
+            total += element.precio;
+        })
+        containerTotal.innerHTML = "";
+        containerTotal.innerHTML =`<h4 class = "total">TOTAL: $${total}</h4>`;
+    }
+}).showToast();

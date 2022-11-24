@@ -10,32 +10,34 @@
     'main main'
     'main main'
     'footer footer';
-    grid-template-rows: 7% auto auto 2%;
+    grid-template-rows: 7% auto auto 5%;
 }
 .header{
     grid-area: header;
     background: linear-gradient(to right, #00b09b, #96c93d);
+    z-index: 5;
     color: rgb(255, 255, 255);
     display: flex;  
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    z-index: 5;
     height: 3.5em;
+    z-index: 35;
 }
 .header__h{
     font-style: italic;
 }
-.header__h1{
+#hh1{
     margin: 0;
     font-size: 1.3em;
 }
-.header__h2{
+#hh2{
     font-weight: lighter;
     font-size: 0.85em;
 }
 .main{
     grid-area: main;
+    height: 100%;
 }
 .main__div{
     position: relative;
@@ -58,7 +60,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 2.5em;
 }
 .divSelect{
     display: flex;
@@ -76,9 +77,48 @@
     z-index: -1;
     margin-top: -2em;
 }
-.container{
-    margin: 1em;
+#container{
+    padding: 1em;
+    z-index: 50;
+    background-color: rgb(255, 255, 255);
 }
+#container1{   
+    grid-area: main;
+    position: absolute;
+    width: 100%;
+    background: linear-gradient(to right, #00b09b, #96c93d);
+}
+#container1__carrito{
+    margin: auto;
+}
+.left{
+    position: absolute;
+    left: -1000000em;
+}
+.show{
+    z-index: 5;
+}
+.unshow{
+    z-index: -1;
+}
+.divinferior__carrito{
+    display: flex;
+    margin: 0 1.2em .8em 1.2em;
+    justify-content: space-between;
+}
+.botoncomprar{
+    background-color: rgb(255, 255, 255);
+    height: 3em;
+    width: 9.5em;
+    border: none;
+}
+.total{
+    margin: .5em 2em;
+    font-size: 1.3em;
+    color: rgb(255, 255, 255);
+}
+
+
 
 
 .productos{
@@ -114,6 +154,6 @@
     color: rgb(255, 255, 255);
     margin: .4em auto;
     height: 3em;
-    display: block;
     width: 9.5em;
+    border: none;
 }

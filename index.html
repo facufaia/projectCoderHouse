@@ -10,13 +10,14 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <script defer type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script defer src="script.js"></script>
     <title>TIENDA DEL CODIGO</title>
 </head>
-<body class="body">
-    <header class="header">
-        <h1 class="header__h header__h1">PEDIDOS UNICAMENTE VIA WEB</h1>
-        <h2 class="header__h header__h2">NO TOMAMOS PEDIDOS POR NINGUNA RED SOCIAL</h2>
+<body class = "body">
+    <header class = "header">
+    <h1 class = "header__h" id = "hh1">PEDIDOS UNICAMENTE VIA WEB</h1>
+    <h2 class = "header__h" id = "hh2">NO TOMAMOS PEDIDOS POR NINGUNA RED SOCIAL</h2>
     </header>
     <main class="main">
         <div class="logotipo">
@@ -36,11 +37,17 @@
                 <option value = "Smart TV">Smart TV</option>
             </select>
         </div>
-        <section class="container">
-       </main>
-    <footer class="footer">
+        <section id = "container1" class="unshow">
+            <div id="container1__carrito"></div>
+            <div class="divinferior__carrito">
+                <button class = "botoncomprar">COMPRAR</button>
+                <div class="container__total"></div>
+            </div>
+        </section>
+        <section id = "container"></section>
+    </main>
+    <footer class = "footer">
         <p>TIENDA DEL CODIGO All rights reserved</p>
     </footer>
 </body>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 </html>
