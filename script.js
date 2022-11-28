@@ -105,6 +105,7 @@ function aggCarrito(array,container){
         card.className = "card";
         card.id = `${i.id}`;
         card.innerHTML =`
+            <button class="cruz">❌</button>
             <h4 class = "card__titulo card__font card__padding">${i.mostrarTitulo()}</h4>
             <img class = "card__img" src = "${i.imagen}">
             <span class = "card__precio card__font">$${i.precio}</span>`;
@@ -115,41 +116,51 @@ function aggCarrito(array,container){
 
 
 
-
-const sectionCards = document.querySelector("#container");
-crearCards(productos,sectionCards);
-const selectFiltro = document.querySelector("#selectFiltro"), 
+const sectionCards = document.querySelector("#container"),
+selectFiltro = document.querySelector("#selectFiltro"), 
 selectCategoria = document.querySelector("#selectCategoria"),
 botonCarrito = document.querySelectorAll(".boton"),
 sectionCarrito = document.querySelector("#container1__carrito"),
 carrito = [],
 cart = JSON.parse(localStorage.getItem('cart')),
 containerSelectionCarrito = document.querySelector("#container1"),
-containerTotal = document.querySelector(".container__total");
+containerTotal = document.querySelector(".container__total"),
+cruz = document.querySelectorAll(".cruz");
+let filtrado = productos;
+crearCards(filtrado,sectionCards);
 
 
 
 
 selectFiltro.addEventListener('change',()=>{
-    // (selectFiltro == "1") ? crearCards(productos.sort((a,b)=>{return a.precio-b.precio}),sectionCards):crearCards(productos.sort((a,b)=>{return b.precio-a.precio}),sectionCards)
-    if (selectFiltro.value == "1"){
-        crearCards(productos.sort((a,b)=>{return a.precio-b.precio}),sectionCards);
+    if(selectFiltro.value == "2"){
+        crearCards(filtrado.sort((a,b)=>{return b.precio-a.precio}),sectionCards);    
     }
-    else{
-        crearCards(productos.sort((a,b)=>{return b.precio-a.precio}),sectionCards);
+    else if(selectFiltro.value == "1"){
+        crearCards(filtrado.sort((a,b)=>{return a.precio-b.precio}),sectionCards);
     }
 });
 selectCategoria.addEventListener('change',()=>{
-    crearCards(productos.filter(objeto => objeto.categoria == selectCategoria.value),sectionCards);
+    selectFiltro.value = "Ordenar por"
+    filtrado = productos.filter(objeto => objeto.categoria == selectCategoria.value);
+    crearCards(filtrado,sectionCards);
 });
-
 botonCarrito.forEach(boton => {
-    boton.addEventListener('click', (x)=>{
+    boton.addEventListener('click', ()=>{
         carrito.push(productos.find(element => element.id == boton.parentElement.id));
         localStorage.setItem('cart',JSON.stringify(carrito));
         aggCarrito(carrito, sectionCarrito);
     })
 });
+cruz.forEach(boton => {
+    boton.addEventListener("click", ()=>{
+        alert("hola")
+        // carrito = carrito.filter(element => element.id !== boton.parentElement.id); 
+    })
+});
+
+
+
 
 Toastify({
     text: "CARRITO",
