@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <script defer src="https://kit.fontawesome.com/a9c333dba5.js" crossorigin="anonymous"></script>
     <script defer type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script defer src="script.js"></script>
     <title>TIENDA DEL CODIGO</title>
@@ -23,6 +24,9 @@
         <div class="logotipo">
             <img src="./logo.jpg">
         </div>
+        <section id = "container1" class="unshow">
+            <div id="container1__carrito"></div>
+        </section>
         <div class = "divSelect">
             <select class = "divSelect__select" id = "selectFiltro">
                 <option class = "divSelect__section" selected>Ordenar por</option>
@@ -35,15 +39,9 @@
                 <option value = "Mouse">Mouses</option>
                 <option value = "Parlante">Parlantes</option>
                 <option value = "Smart TV">Smart TV</option>
+                <option value = "Auriculares">Auriculares</option>
             </select>
         </div>
-        <section id = "container1" class="unshow">
-            <div id="container1__carrito"></div>
-            <div class="divinferior__carrito">
-                <button class = "botoncomprar">COMPRAR</button>
-                <div class="container__total"></div>
-            </div>
-        </section>
         <section id = "container"></section>
     </main>
     <footer class = "footer">

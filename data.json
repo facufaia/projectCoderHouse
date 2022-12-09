@@ -1,0 +1,20 @@
+[
+    {
+        "cantidad":0,
+        "imagen": "https://http2.mlstatic.com/D_NQ_NP_2X_858745-MLA51471186702_092022-F.webp", 
+        "id": 400,
+        "marca" : "Red Dragon",
+        "precio": 5900,
+        "titulo":"Auriculares Red Dragon Stripes",
+        "categoria": "Auriculares"
+    },
+    {
+        "cantidad":0,
+        "imagen": "https://http2.mlstatic.com/D_NQ_NP_2X_647270-MLA44484230017_012021-F.webp", 
+        "id": 401,
+        "marca" : "Red Dragon",
+        "precio": 23000,
+        "titulo": "Auriculares Red Dragon Zeus 2",
+        "categoria": "Auriculares"
+    }
+]
